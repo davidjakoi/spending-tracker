@@ -1,0 +1,9 @@
+<div class="spending-list-wrapper">
+  <spending
+    *ngFor="let spending of spendings$ | async"
+    [amount]="spending.amount"
+    [currency]="spending.currency"
+    [description]="spending.description"
+    [spent_at]="spending.spent_at"
+  ></spending>
+</div>

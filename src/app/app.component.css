@@ -1,0 +1,8 @@
+.app-wrapper {
+    align-items: center;
+    background-color: #F2F1F6;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    justify-self: center; */
+}

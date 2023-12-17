@@ -1,0 +1,27 @@
+.form-wrapper {
+    form {
+        align-items: center;
+        align-self: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 50px;
+    }
+}
+
+mat-form-field {
+    width: 25%;
+}
+
+.sort-form-wrapper {
+    margin-bottom: 10px;
+
+    form {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.sort-select {
+    width: 50%;
+}

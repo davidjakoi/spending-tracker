@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-content>
+    <div class="currency-wrapper">
+      <p>{{ currency }}</p>
+    </div>
+    <div class="main-wrapper">
+      <span class="description">{{ description }}</span>
+      <span class="spent-at">{{ spent_at | date : "h:mm a, MMM d, y" }}</span>
+    </div>
+    <div class="amount-wrapper">
+      <p>{{ getAmountInCurrency() }}</p>
+    </div>
+  </mat-card-content>
+</mat-card>

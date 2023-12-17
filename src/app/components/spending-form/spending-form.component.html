@@ -1,0 +1,46 @@
+<div class="form-wrapper">
+  <form [formGroup]="newSpendingForm" #formDir="ngForm">
+    <mat-form-field appearance="outline" [color]="'primary'">
+      <input formControlName="description" matNativeControl placeholder="Description" />
+      <!-- <mat-hint *ngIf="newSpendingForm.controls.description.invalid && (formDir.submitted || newSpendingForm.controls.amount.touched)">Name is required.</mat-hint> -->
+      @if (newSpendingForm.controls.description.hasError('required')) {
+      <mat-error><strong>Required field!</strong></mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <input matInput formControlName="amount" placeholder="Amount" />
+      @if (newSpendingForm.controls.amount.hasError('required')) {
+      <mat-error><strong>Required field!</strong></mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field floatLabel="always">
+      <mat-select formControlName="currency" placeholder="Currency">
+        <mat-option value="HUF">HUF</mat-option>
+        <mat-option value="USD">USD</mat-option>
+      </mat-select>
+      @if (newSpendingForm.controls.currency.hasError('required')) {
+      <mat-error><strong>Required field!</strong></mat-error>
+      }
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="submitForm()" type="submit" form="ngForm">SAVE</button>
+  </form>
+</div>
+
+<div class="sort-form-wrapper">
+  <form [formGroup]="sortAndFilterForm">
+    <mat-form-field floatLabel="always" class="sort-select" subscriptSizing="dynamic">
+      <mat-select [formControl]="sortAndFilterForm.controls.order" placeholder="Sort by Date descending (default)">
+        <mat-option value="-spent_at">Sort by Date descending (default)</mat-option>
+        <mat-option value="spent_at">Sort by Date ascending</mat-option>
+        <mat-option value="-amount">Sort by Amount descending</mat-option>
+        <mat-option value="amount">Sort by Amount ascending</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-button-toggle-group [formControl]="sortAndFilterForm.controls.currency" aria-label="Font Style">
+      <mat-button-toggle value="null">ALL</mat-button-toggle>
+      <mat-button-toggle value="HUF">HUF</mat-button-toggle>
+      <mat-button-toggle value="USD">USD</mat-button-toggle>
+    </mat-button-toggle-group>
+  </form>
+</div>

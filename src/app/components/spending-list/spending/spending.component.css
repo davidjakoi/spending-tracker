@@ -1,0 +1,37 @@
+.spending-wrapper {
+    display: flex;
+}
+
+mat-card {
+    justify-self: center;
+    margin-bottom: 10px;
+}
+
+mat-card-content {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    .currency-wrapper {
+        color: #307CCC;
+        font-weight: bold;
+    }
+}
+
+.description {
+    font-weight: bold;
+}
+
+.spent-at {
+    color: #ADADAD
+}
+
+.main-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+.amount-wrapper {
+    font-weight: bold;
+}
