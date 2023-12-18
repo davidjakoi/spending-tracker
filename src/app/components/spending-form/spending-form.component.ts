@@ -23,12 +23,14 @@ import { SpendingServiceService } from "./services/spending-service.service";
   styleUrl: "./spending-form.component.css"
 })
 export class SpendingFormComponent implements OnInit {
-  constructor(private store: Store<AppState>, private readonly spendingServiceService: SpendingServiceService) {}
+  constructor(readonly store: Store<AppState>, readonly spendingServiceService: SpendingServiceService) {}
+
+  defaultNewSpendingFormValue = { amount: null, currency: null, description: "" };
 
   newSpendingForm = new FormGroup({
-    amount: new FormControl<number | null>(null, Validators.required),
-    currency: new FormControl<Currency>(null, Validators.required),
-    description: new FormControl<string>("", Validators.required)
+    amount: new FormControl<number | null>(this.defaultNewSpendingFormValue.amount, Validators.required),
+    currency: new FormControl<Currency>(this.defaultNewSpendingFormValue.currency, Validators.required),
+    description: new FormControl<string>(this.defaultNewSpendingFormValue.description, Validators.required)
   });
 
   sortAndFilterForm = new FormGroup({
@@ -37,13 +39,13 @@ export class SpendingFormComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.getSpendingsAndStoreThem(this.sortAndFilterForm.value);
+    this.getAndStoreSpendings(this.sortAndFilterForm.value);
     this.sortAndFilterForm.valueChanges.subscribe((formValue) => {
-      this.getSpendingsAndStoreThem(formValue);
+      this.getAndStoreSpendings(formValue);
     });
   }
 
-  getSpendingsAndStoreThem = (formValue?: SpendingParamsModel) => {
+  getAndStoreSpendings = (formValue?: SpendingParamsModel) => {
     this.spendingServiceService
       .getSpendings({ ...formValue })
       .pipe(take(1))
@@ -55,10 +57,7 @@ export class SpendingFormComponent implements OnInit {
     if (this.newSpendingForm.valid) {
       this.spendingServiceService.addSpending({ ...this.newSpendingForm.value, spent_at: new Date().toISOString() } as SpendingModel).subscribe((spendingValue) => {
         this.store.dispatch(addSpending({ spending: spendingValue }));
-        this.newSpendingForm.reset({ amount: null, currency: null, description: "" });
-        /* this.newSpendingForm.updateValueAndValidity();
-        this.newSpendingForm.markAsPristine();
-        this.newSpendingForm.markAsUntouched(); */
+        this.newSpendingForm.reset(this.defaultNewSpendingFormValue);
       });
     }
   };

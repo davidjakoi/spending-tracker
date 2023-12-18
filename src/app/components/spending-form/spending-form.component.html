@@ -1,17 +1,16 @@
-<div class="form-wrapper">
+<div class="new-spending-form-wrapper">
   <form [formGroup]="newSpendingForm" #formDir="ngForm">
     <mat-form-field appearance="outline" [color]="'primary'">
-      <input formControlName="description" matNativeControl placeholder="Description" />
-      <!-- <mat-hint *ngIf="newSpendingForm.controls.description.invalid && (formDir.submitted || newSpendingForm.controls.amount.touched)">Name is required.</mat-hint> -->
+      <input formControlName="description" matNativeControl placeholder="Description" type="text" />
       @if (newSpendingForm.controls.description.hasError('required')) {
-      <mat-error><strong>Required field!</strong></mat-error>
+      <mat-error><strong>Description is required!</strong></mat-error>
       }
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <input matInput formControlName="amount" placeholder="Amount" />
+      <input matInput formControlName="amount" placeholder="Amount" type="number" />
       @if (newSpendingForm.controls.amount.hasError('required')) {
-      <mat-error><strong>Required field!</strong></mat-error>
+      <mat-error><strong>Amount is required!</strong></mat-error>
       }
     </mat-form-field>
     <mat-form-field floatLabel="always">
@@ -20,7 +19,7 @@
         <mat-option value="USD">USD</mat-option>
       </mat-select>
       @if (newSpendingForm.controls.currency.hasError('required')) {
-      <mat-error><strong>Required field!</strong></mat-error>
+      <mat-error><strong>Currency is required!</strong></mat-error>
       }
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="submitForm()" type="submit" form="ngForm">SAVE</button>

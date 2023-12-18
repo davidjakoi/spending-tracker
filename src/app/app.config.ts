@@ -1,8 +1,8 @@
-import { ApplicationConfig, importProvidersFrom, isDevMode } from "@angular/core";
+import { ApplicationConfig, isDevMode } from "@angular/core";
 import { provideRouter } from "@angular/router";
 
 import { routes } from "./app.routes";
-import { BrowserAnimationsModule, provideAnimations } from "@angular/platform-browser/animations";
+import { provideAnimations } from "@angular/platform-browser/animations";
 import { provideHttpClient } from "@angular/common/http";
 import { provideStore } from "@ngrx/store";
 import { provideStoreDevtools } from "@ngrx/store-devtools";
@@ -14,7 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideStore({ spendings: spendingsReducer }),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }) /* ,
-    importProvidersFrom([BrowserAnimationsModule]) */
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
   ]
 };
